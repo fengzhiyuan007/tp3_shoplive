@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, maximum-scale=1.0, initial-scale=1.0, user-scalable=0" />
+		<title>文章分享</title>
+		<link rel="stylesheet" href="__PUBLIC__/share/css/reset.css" />
+		<link rel="stylesheet" href="__PUBLIC__/share/css/article.css" />
+	</head>
+	<body>
+		<div class="banner">
+			<img src="{$info.img}"/>
+			<div class="head">
+				<div class="m-head">
+					<div class="head-left">品聚轻奢</div>
+					<div class="head-right">
+						<a href="#" onclick="openApp();">用App打开</a>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="intro">
+			<div class="mintro">
+				<div class="intro-left">
+					<img src="{$user.img}"/>
+					<span>{$user.username}</span>
+				</div>
+				<div class="intro-right" onclick="openApp();"><span>关注</span></div>
+			</div>
+		</div>
+		<hr style="margin-top: -5px" />
+
+		<div class="title">
+			<div class="title-left">
+				{$info.title}
+			</div>
+
+			<div class="title-right" onclick="openApp();"><p class="buyzi">商品{$count}</p ><img src="__PUBLIC__/share/images/buy.png" /></div>
+		</div>
+
+		<div class="details">
+			{$info.detail}
+		</div>
+		<div class="evaluate-head">
+			<div class="ehead-left">评价<span>({$info.comments})</span></div>
+			<div class="ehead-right" onclick="openApp();">更多>></div>
+		</div>
+
+		<volist name="comment" id="vo">
+			<div class="evaluate-list">
+				<div class="el-head">
+					<div class="elhead-left">
+						<if condition="$vo.type eq 2 ">
+							<div class="elname">{$vo.username} @ {$vo.to_name}</div>
+						<else />
+							<div class="elname">{$vo.username}</div>
+						</if>
+
+						<ul class="star">
+							<li><img src="__PUBLIC__/share/images/star-true.png"</li>
+							<li><img src="__PUBLIC__/share/images/star-true.png"</li>
+							<li><img src="__PUBLIC__/share/images/star-true.png"</li>
+							<li><img src="__PUBLIC__/share/images/star-true.png"</li>
+						</ul>
+					</div>
+					<div class="elhead-right">{$vo.intime|date="Y-m-d",###}</div>
+				</div>
+				<div class="evaluate-detalis">{$vo.content}</div>
+			</div>
+		</volist>
+
+		
+		
+		<div style="width: 100%; height: 40px;"></div>
+		<div class="foot">
+			<div class="mfoot" onclick="openApp();">
+				<div class="collect">{$info.collect}</div>
+				<div class="txt">{$info.comments}</div>
+				<div class="zan">{$info.zan}</div>
+			</div>
+		</div>
+
+		<script type="text/javascript" src="__PUBLIC__/share/js/jquery.min.js" ></script>
+
+		<script>
+			
+		//打开（下载）App
+
+		function openApp(){
+
+			var ua = window.navigator.userAgent.toLowerCase();
+
+			//微信
+
+			if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+
+				// window.location.href='downLoadForPhone';
+				alert('点击右上角，在浏览器打开')
+
+			}else{
+			//非微信浏览器
+
+				if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
+
+				 var loadDateTime = new Date();
+
+				 window.setTimeout(function() {
+
+				 	var timeOutDateTime = new Date();
+
+				 	if (timeOutDateTime - loadDateTime < 5000) {
+
+				 		window.location = "http://itunes.apple.com/cn/app/id1425741783";//ios下载地址
+
+				 	} else {
+
+				 		window.close();
+
+				 	}
+
+				 },2000);
+
+				 window.location = "pinju://tp3shoplive.zhongfeigou.com?type=activity&atype=6&aid={$info.a_id}&uid={$info.user_id}&liveid=0";
+
+				 }else if (navigator.userAgent.match(/android/i)) {
+
+				 var state = null;
+
+				 try {
+
+				 	window.location = "pinju://tp3shoplive.zhongfeigou.com?type=activity&atype=6&aid={$info.a_id}&uid={$info.user_id}&liveid=0";
+
+				 	setTimeout(function(){
+
+							window.location= "http://baidu.com"; //android下载地址
+
+						},500);
+
+				 } catch(e) {}
+
+				 }
+
+			}
+
+		}
+		</script>
+	</body>
+</html>

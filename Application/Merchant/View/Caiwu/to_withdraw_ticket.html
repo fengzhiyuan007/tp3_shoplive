@@ -1,0 +1,45 @@
+<include file="Public:header" />
+<php>
+$mid = I('get.mid');
+</php>
+<div class="page-container">
+    <div id="big"></div>
+    <div id="big2"></div>
+    <form class="form form-horizontal" id="form" method="post">
+        <div class="row cl" style="padding-left: 320px">
+            <span style="font-size: 20px;">钻石转换余额</span>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>钻石数：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" name="get_money" readonly class="input-text" value="{$re['get_money']}" placeholder="" id="get_money" readonly style="width: 50%"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>余额：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" name="money" readonly class="input-text" value="{$re['money']?$re['money']:''}" placeholder="" id="money" style="width: 50%"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>转化比：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" name="cash_money" readonly class="input-text" value="{$cash_money}" placeholder="转化比"  id="cashmoney" style="width: 50%"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>转化余额：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" name="moneys" readonly class="input-text" value="{$re['moneys']}" placeholder="" id="moneys" style="width: 50%"/>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+                <button  class="submit btn btn-primary radius"  type="submit"><i class="Hui-iconfont">&#xe6b7;</i>钻石转化</button>
+            </div>
+        </div>
+    </form>
+</div>
+<!--/请在上方写此页面业务相关的脚本-->
+<include file="Public:footer" />

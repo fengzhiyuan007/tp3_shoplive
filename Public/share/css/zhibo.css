@@ -1,0 +1,140 @@
+.video {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.video video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0;
+}
+.head {
+    width: 100%;
+    height: 50px;
+    background: rgba(138,134,134,.5);
+    position: absolute;
+    top: 0px;
+    left: 0;
+}
+.m-head {
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+}
+.head-left {
+    width: 50%;
+    float: left;
+    color: #fff;
+    background: url(../images/logo.png) no-repeat left center;
+    background-size: 30px 30px;
+    text-indent: 40px;
+    font-size: 14px;
+    line-height: 50px;
+}
+.head-right {
+    width: 50%;
+    float: right;
+    height: 100%;
+}
+.head-right a {
+    display: block;
+    width: 80px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #ff000d;
+    font-size: 14px;
+    color: #ff000d;
+    text-align: center;
+    line-height: 30px;
+    margin-top: 8px;
+    float: right;
+}
+.portrait{
+	width:40%;
+	height: 40px;
+	background: rgba(0,0,0,.5);
+	border-radius: 30px;
+	position: absolute;
+	top: 60px;
+	left: 5%;
+}
+.portrait img{
+	display: block;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	margin-left: 5%;
+	float: left;
+	margin-top: 5px;
+}
+.portrait span{
+	display: block;
+	width: 60%;
+	height: 40px;
+	color: #fff;
+	margin-left: 3%;
+	line-height: 40px;
+	float: left;
+	font-size: 14px;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+.foot{
+	width: 100%;
+	height: 50px;
+	left: 0;
+	bottom: 0;
+	position: fixed;
+}
+.mfoot{
+	width: 95%;
+	height: 100%;
+	margin: 0 auto;
+	position: relative;
+}
+.spname{
+	position: absolute;
+	font-size: 8px;
+	color: #fff;
+	height: 50px;
+	line-height: 40px;
+	width:30px;
+	top: 0;
+	left: 0;	
+}
+.footimg1{
+	display: block;
+	height: 30px;
+	width: auto;
+	float: left;
+}
+.foot input{
+	width: 65%;
+	height: 30px;
+	border-radius: 5px;
+	background: rgba(0,0,0,.5);
+	float: left;
+	margin-left: 2%;
+	border: none;
+}
+.foot input::-webkit-input-placeholder{
+	color: #fff;
+	font-size: 14px;
+	text-indent: 5%;
+}
+.footimg2{
+	display: block;
+	height:30px;
+	width: auto;
+	float: left;
+	margin-left: 2%;
+}
+.footimg3{
+	display: block;
+	height:30px;
+	width: auto;
+	float: left;
+	margin-left: 2%;
+}

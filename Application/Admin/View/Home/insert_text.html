@@ -1,0 +1,35 @@
+<include file="Public:header" />
+
+<article class="page-container">
+	<div id="big"></div>
+	<div id="big2"></div>
+	<form class="form form-horizontal" id="form" method="post">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>标题：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" name="title" class="input-text" value="{$re['title']}" placeholder="标题" id="title" />
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">内容：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<textarea name="content"  id="content1" style='width:100%;height:300px;'  placeholder="说点什么...最少输入10个字符" >{$re['content']}</textarea>
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+				<button  class="submit btn btn-primary radius"  type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存并提交</button>
+				<!--<button onClick="article_save();" class="btn btn-secondary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存草稿</button>-->
+				<button onClick="removeIframe();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+				<input type="hidden" class="input-text" value="{$re.text_id}" placeholder=""  name="text_id">
+			</div>
+		</div>
+	</form>
+</article>
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript">
+UE.getEditor('content1');
+		
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+<include file="Public:footer" />

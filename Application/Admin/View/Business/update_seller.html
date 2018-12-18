@@ -1,0 +1,637 @@
+<include file="Public:header" />
+<load href="__PUBLIC__/admin/js/uploadify.css" />
+<load href="__PUBLIC__/admin/js/swfobject.js" />
+<script type="text/javascript" src="__PUBLIC__/admin/js/jquery.uploadify.v2.1.4.min.js"></script>
+
+<script type="text/javascript">
+ $(function($) {
+	$("#file_upload2").uploadify({
+	 		'uploader'       : '__PUBLIC__/admin/js/uploadify.swf',
+	 		'script'         : '__PUBLIC__/admin/js/uploadify.php',
+	 		'cancelImg'      : '__PUBLIC__/admin/images/cancel.png',
+	 		'folder'         : '__PUBLIC__/admin/Uploads/touxiang',
+	 		'queueID'        : 'fileQueue2',
+	 		'sizeLimit'      :	10 * 1000 * 1024,
+			'buttonImg'      : '__PUBLIC__/admin/images/llsc.jpg',
+			'width'          :  85,
+			'height'         :  28,
+	 		'fileExt'        : '*.jpg;*.gif;*.png;', //允许文件上传类型,和fileDesc一起使用.
+	 		'fileDesc'       : '*.jpg;*.gif;*.png;',  //选择文件对话框中的提示文本.
+	 		'auto'           : true,
+	 		'multi'          : false,	
+	 		'onComplete':function(event,queueId,fileObj,response,data){
+	 			$('input[name="logo"]').val(response);
+	 			$('#pic2').attr('src', response);
+	 		}
+	 	});
+
+	 });
+</script>
+<SCRIPT language=JavaScript>
+    window.onload=function(){
+        var day_switch = document.getElementsByName("day_switch");
+        for (i=0; i<day_switch.length; i++) {
+            if (day_switch[i].checked) {
+                a = day_switch[i].value;
+            }
+        }
+        if(a==1){
+            document.getElementById("s_time").className="";
+        }else{
+            document.getElementById("s_time").className="s_time";
+        }
+
+    }
+	     function checkss(){
+             var id = $("#id").val();
+	    	 var phone    = $("#phone").val();
+             // var ID    = $("#ID").val();
+             // var master_id = $("#master_id").val();
+             // var day_switch = document.getElementsByName("day_switch");
+             // for (i=0; i<day_switch.length; i++) {
+             //     if (day_switch[i].checked) {
+             //         a = day_switch[i].value;
+             //     }
+             // }
+             // var start    = $("#start").val();
+             // var end    = $("#end").val();
+//	    	 if(phone==''){
+//                 $(".yzphone").html('填写账号！');
+//                 $("#phone").focus();
+//                 return false;
+//	    	 }
+	    	 // if(a==1){
+	    	 //     if (start==''){
+       //               $(".yztime").html('选择开始日期！');
+       //               $("#start").focus();
+       //               return false;
+       //           }else if (end==''){
+       //               $(".yztime").html('选择结束日期！');
+       //               $("#end").focus();
+       //               return false;
+       //           }
+       //       }else 
+             if(phone!='') {
+                 $(".yzphone").html('');
+                 var result=false;
+                 $.ajax({async:false//要设置为同步的，要不CheckUserName的返回值永远为false
+                     ,url:'{:U("yzmobile")}',data:{id:id,mobile:phone}
+                     ,success:function(data){
+                         if(data == 1){
+                             $(".yzphone").html('账号已注册');
+                             $("#phone").focus();
+                             result = false;
+                         }else if(data == 4){
+                             $(".yzmaster_id").html('ID不存在');
+                             // $("#master_id").focus();
+                             result = false;
+                         } else {
+                             result = true;
+                         }
+                     }});
+                 return result;
+             }
+	    	 
+	     }
+
+         function area_linke1(value){
+             $.post("{:U('get_area')}", {value:value,type:1}, function(v){
+
+                 $("#shi").html(v);
+
+             });
+         }
+         function area_linke2(value){
+             $.post("{:U('get_area')}", {value:value,type:2}, function(v){
+
+                 $("#qu").html(v);
+
+             });
+         }
+         function selday_switch(key) {
+             if(key==1){
+                 document.getElementById("s_time").className="";
+             }else{
+                 document.getElementById("s_time").className="s_time";
+             }
+         }
+
+	</script>
+<style>
+    .s_time{display: none}
+</style>
+<div class="content">
+<div id="big"></div>
+<div id="big2"></div>
+
+<div class="infoBox">
+<form name="form" method="post">
+<table width="90%" border="0" cellpadding="0" cellspacing="0" id="basic">
+               <input type="hidden" value="{$re.member_id}" name="id" id="id">
+                <!-- <tr>
+                    <td  width="10%" class="infoBoxTd"><div style="width:65px;">用户账号:</div></td>
+                    <td ><input type="text" id="phone"  name="phone" value="{$re['phone']?$re['phone']:''}" style="width:250px;">
+                    &nbsp;&nbsp;<span class="yzphone" style="color:red"></span>
+                    </td>
+                </tr> -->
+                <tr>
+                  <td  width="10%" class="infoBoxTd"><div style="width:65px;">店铺名称:</div></td>
+		  		  <td ><input type="text" name ="merchants_name" value="{$re['merchants_name']?$re['merchants_name']:''}"  id="merchants_name" style="width:250px;">&nbsp;&nbsp;&nbsp;
+                     <!-- ID: <input type="text" id="ID"  name="ID" value="{$u.id}" style="width:180px;"> <span class="yzID" style="color:red"><if condition=" $u.user_id eq '' ">注:不填则自动生成</if></span>
+                      等级:<input type="text" id="grade"  name="grade" value="{$u.grade}" style="width:180px;"><if condition=" $u.user_id eq '' ">注:默认1级</if> -->
+                  </td>
+                </tr>
+                <tr>
+                    <td  width="10%" class="infoBoxTd"><div style="width:65px;">联系人姓名:</div></td>
+                    <td ><input type="text" id="contact_name"  name="contact_name" value="{$re['contact_name']?$re['contact_name']:''}" style="width:250px;">&nbsp;&nbsp;<span class="yzmaster_id" style="color:red"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td  width="10%" class="infoBoxTd"><div style="width:65px;">联系电话:</div></td>
+                    <td ><input type="text" value="{$re['contact_mobile']?$re['contact_mobile']:''}"  id="contact_mobile" name="contact_mobile" style="width:250px;">&nbsp;&nbsp;<span class="yzmaster_id" style="color:red"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td  width="10%" class="infoBoxTd"><div style="width:65px;">公司名称:</div></td>
+                    <td ><input type="text" name="company_name" value="{$re['company_name']?$re['company_name']:''}"  id="company_name" style="width:250px;">&nbsp;&nbsp;<span class="yzmaster_id" style="color:red"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td  width="10%" class="infoBoxTd"><div style="width:65px;">公司电话:</div></td>
+                    <td ><input type="text" value="{$re['company_mobile']?$re['company_mobile']:''}"  id="company_mobile" name="company_mobile" style="width:250px;" >&nbsp;&nbsp;<span class="yzmaster_id" style="color:red"></span>
+                    </td>
+                </tr>
+              
+                <tr>
+                    <td  width="10%" class="infoBoxTd"><div style="width:100px;">平台对商户抽成比:</div></td>
+                    <td ><input type="number" min="0" max="100" step="0.01" value="{$re['merchants_per']?$re['merchants_per']:''}"  id="merchants_per" name="merchants_per" style="width:150px;" >%&nbsp;&nbsp;<!-- <span class="yzmaster_id" style="color:red"></span> -->
+                    </td>
+                </tr>
+
+                <tr>
+                    <td  width="10%" class="infoBoxTd"><div style="width:100px;">销售提成比:</div></td>
+                    <td ><input type="number" min="0" max="100" step="0.01" value="{$re['goods_per']?$re['goods_per']:''}"  id="goods_per" name="goods_per" style="width:150px;" >%&nbsp;&nbsp;<!-- <span class="yzmaster_id" style="color:red"></span> -->
+                    </td>
+                </tr>
+
+                <tr>
+                  <td style="text-align:right;color:#2d52a5">地址:</td>
+                  <td>
+                      <select name="sheng" onchange="area_linke1(this.value)">
+                          <option value="">请选择</option>
+                          <volist name="sheng" id="l">
+                              <option value="{$l.id}" <if condition=" $re.merchants_province eq $l.name ">selected<else/></if>>{$l.name}</option>
+                          </volist>
+                      </select>
+                      <select name="shi" id="shi" onchange="area_linke2(this.value)">
+                          <if condition=" $re.shi eq null "><else/>
+                              <option value=''>请选择（市）</option>
+                              <volist name="re.shi" id="s">
+                                  <option value="{$s.id}" <if condition=" $re.city_id eq $s.id ">selected<else/></if>>{$s.name}</option>
+                              </volist>
+                          </if>
+                      </select>
+                      <select name="qu" id="qu">
+                          <if condition=" $re.qu eq null "><else/>
+                              <option value=''>请选择（区/县）</option>
+                              <volist name="re.qu" id="s">
+                                  <option value="{$s.id}" <if condition=" $re.area_id eq $s.id ">selected<else/></if>>{$s.name}</option>
+                              </volist>
+                          </if>
+                      </select>
+                      
+                  </td>
+                </tr>
+                <tr>
+                    <td  width="10%" class="infoBoxTd"><div style="width:65px;">店铺地址:</div></td>
+                    <td ><input value="{$re['merchants_address']?$re['merchants_address']:''}"  id="merchants_address" name="merchants_address" placeholder="具体地址" type="text" size="50"></span>
+                    </td>
+                </tr>
+                <!-- <tr>
+                  <td  width="2%"  style="text-align:right;color:#2d52a5"><div style="width:65px;">头像:</div></td>
+		  		  <td colspan="2">
+		  		  <div class="upimg-box"><div id="fileQueue2"></div>
+                  <input id="file_upload2" type="file" />
+                  <input name="logo" type="hidden" id="fileDoc" value="{$u.img}" />
+                  &nbsp;&nbsp;<img  id="pic2" src="<if condition='$u.img eq "" '>__PUBLIC__/admin/images/nopic.gif<else/>{$u.img}</if>" width="110"  height="60"/>
+                 </div>
+		  		  </td>
+                </tr> -->
+        <tr>
+            <td  width="2%"  style="text-align:right;color:#2d52a5"><div style="width:65px;">店铺图片:</div></td>
+            <td colspan="2">
+                <div class="droparea spot" id="image1" style="background-image: url('{$re.merchants_img}');background-size: 220px 160px;" >
+                    <div class="instructions" onclick="del_image('1')">店铺图片</div>
+                    <div id="uparea1"></div>
+                    <input type="hidden" name="merchants_img" id="image_1" value="{$re['merchants_img']?$re['merchants_img']:''}" />
+                    <input type="hidden" name="merchants_imgs" id="image_11" value="{$re['merchants_img']?$re['merchants_img']:''}" />
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td  width="2%"  style="text-align:right;color:#2d52a5"><div style="width:65px;">法人照片:</div></td>
+            <td style="width: 220px;">
+                <div class="droparea spot" id="image2" style="background-image: url('{$re.legal_img}');background-size: 220px 160px;" >
+                    <div class="instructions" onclick="del_image('2')">法人照片</div>
+                    <div id="uparea2"></div>
+                    <input type="hidden" name="legal_img" id="image_2" value="{$re['legal_img']?$re['legal_img']:''}" />
+                    <input type="hidden" name="legal_imgs" id="image_22" value="{$re['legal_img']?$re['legal_img']:''}" />
+                </div>
+            </td>
+
+            <td >
+                <div class="droparea spot" id="image3" style="background-image: url('{$re.legal_face_img}');background-size: 220px 160px;" >
+                    <div class="instructions" onclick="del_image('3')">正面照</div>
+                    <div id="uparea3"></div>
+                    <input type="hidden" name="legal_face_img" id="image_3" value="{$re['legal_face_img']?$re['legal_face_img']:''}" />
+                    <input type="hidden" name="legal_face_imgs" id="image_33" value="{$re['legal_face_img']?$re['legal_face_img']:''}" />
+                </div>
+            </td>
+
+        </tr>
+        <tr>
+            <td  width="2%"  style="text-align:right;color:#2d52a5"><div style="width:65px;"></div></td>
+            <td style="width: 220px;">
+                <div class="droparea spot" id="image4" style="background-image: url('{$re.legal_opposite_img}');background-size: 220px 160px;" >
+                    <div class="instructions" onclick="del_image('4')">反面照</div>
+                    <div id="uparea4"></div>
+                    <input type="hidden" name="legal_opposite_img" id="image_4" value="{$re['legal_opposite_img']?$re['legal_opposite_img']:''}" />
+                    <input type="hidden" name="legal_opposite_imgs" id="image_44" value="{$re['legal_opposite_img']?$re['legal_opposite_img']:''}" />
+                </div>
+            </td>
+
+            <td >
+                <div class="droparea spot" id="image5" style="background-image: url('{$re.legal_hand_img}');background-size: 220px 160px;" >
+                    <div class="instructions" onclick="del_image('5')">手持照</div>
+                    <div id="uparea5"></div>
+                    <input type="hidden" name="legal_hand_img" id="image_5" value="{$re['legal_hand_img']?$re['legal_hand_img']:''}" />
+                    <input type="hidden" name="legal_hand_imgs" id="image_55" value="{$re['legal_hand_img']?$re['legal_hand_img']:''}" />
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td  width="2%"  style="text-align:right;color:#2d52a5"><div style="width:65px;">营业执照:</div></td>
+            <td style="width: 220px;">
+                <div class="droparea spot" id="image6" style="background-image: url('{$re.business_img}');background-size: 220px 160px;" >
+                    <div class="instructions" onclick="del_image('6')">营业执照</div>
+                    <div id="uparea6"></div>
+                    <input type="hidden" name="business_img" id="image_6" value="{$re['business_img']?$re['business_img']:''}" />
+                    <input type="hidden" name="business_imgs" id="image_66" value="{$re['business_img']?$re['business_img']:''}" />
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td  width="2%"  style="text-align:right;color:#2d52a5"><div style="width:65px;">二维码:</div></td>
+            <td style="width: 220px;">
+                <div class="droparea spot" id="image6" style="background-image: url('{$re.code}');background-size: 220px 160px;" >
+                    <div class="instructions" >二维码</div>
+                    <div id=""></div>
+                    
+                </div>
+            </td>
+        </tr>
+
+                 <!-- <tr>
+                  <td  width="10%" class="infoBoxTd"><div style="width:65px;">性别:</div></td>
+		  		  <td colspan="2">
+                      <input type="radio" name="sex" id="sex" value="1" <if condition=" $u.sex eq 1 ">checked=checked<else/></if>>男&nbsp;&nbsp;
+                      <input type="radio" name="sex" id="sex" value="2" <if condition=" $u.sex eq 2 ">checked=checked<else/></if>>女
+                  </td>
+                </tr> -->
+                 
+                 <tr>
+                  <td class="infoBoxTd">店铺简介:</td>
+		  		  <td colspan="2">
+		  		  <textarea id="merchants_content" name="merchants_content" style="width: 450px;height: 80px">{$re.merchants_content}</textarea>
+		  		  </td>
+                </tr>
+        
+        <tr>
+            <td  width="2%"  style="text-align:right;color:#2d52a5"><div style="width:65px;">商品分类:</div></td>
+            <td >
+                <volist name="parent_class" id="vo">
+                <input type="checkbox" id="checkbox-2" name="goods_class[]" value="{$vo.class_id}"<if condition="$vo.is_selected eq 1">checked</if>>
+            &nbsp;{$vo.class_name}&nbsp;&nbsp;
+                </volist>
+            </td>
+        </tr>
+
+        <tr>
+            <td  width="2%"  style="text-align:right;color:#2d52a5"><div style="width:65px;">是否总仓:</div></td>
+            <td>
+                <select name="is_all">
+                      <option value="1" <if condition=" $re.is_all eq 1 ">selected<else/></if>>是</option>
+                      <option value="0" <if condition=" $re.is_all eq 0 ">selected<else/></if>>否</option>
+                </select>
+            </td> 
+        </tr>
+        
+
+                <!-- <if condition="!empty($u['user_id'])">
+                <tr>
+                    <td class="infoBoxTd">收益:</td>
+                    <td colspan="2">
+                        <input type="text" id="get_money"  name="get_money" value="{$u.get_money}" style="width:250px;">&nbsp;火力
+                    </td>
+                </tr>
+                </if>
+                <tr>
+                    <td  width="10%" class="infoBoxTd"><div style="width:65px;">提现开关:</div></td>
+                    <td colspan="2">
+                        <input type="radio" name="withdraw_switch" value="1" <if condition=" $u.user_id eq '' or $u.withdraw_switch eq 1 ">checked</if>>&nbsp;开启&nbsp;&nbsp;
+                        <input type="radio" name="withdraw_switch" value="2" <if condition=" $u.withdraw_switch eq 2 ">checked</if>>&nbsp;关闭
+                    </td>
+                </tr>
+                <tr>
+                    <td  width="10%" class="infoBoxTd"><div style="width:65px;">是否认证:</div></td>
+                    <td colspan="2">
+                        <input type="radio" name="is_authen" value="1" <if condition=" $u.is_authen eq 1 or $u.is_authen eq ''">checked</if>>&nbsp;未认证&nbsp;&nbsp;
+                        <input type="radio" name="is_authen" value="2" <if condition=" $u.is_authen eq 2 ">checked</if>>&nbsp;认证通过
+                    </td>
+                </tr>
+                <tr>
+                    <td width="18%" class="infoBoxTd"><div style="width:65px;">日期开关：</div></td>
+                    <td colspan="2">
+                        <input type="radio" name="day_switch" value="1" onchange="selday_switch(this.value);" <if condition=" $u.day_switch eq 1 ">checked</if>>&nbsp;开启&nbsp;&nbsp;
+                        <input type="radio" name="day_switch" value="2" onchange="selday_switch(this.value);" <if condition=" $u.user_id eq '' or $u.day_switch eq 2 ">checked</if>>&nbsp;关闭
+                        &nbsp;&nbsp;&nbsp;&nbsp;注:预设日期提现开关按钮
+                    </td>
+                </tr>
+                <tr id="s_time" class="s_time">
+                    <td width="18%" class="infoBoxTd"><div style="width:65px;">关闭日期：</div></td>
+                    <td colspan="2">
+                        <input type="text" class="laydate-icon" name="start_time" id="start" size="22" value="<if condition=" $u.start_time eq 0 "><else/>{$u.start_time|date="Y-m-d H:i:s",###}</if>" readonly> - <input type="text" class="laydate-icon" name="end_time" id="end" size="22" value="<if condition=" $u.end_time eq 0 "><else/>{$u.end_time|date="Y-m-d H:i:s",###}</if>" readonly><span class="yztime" style="color:red"></span>
+                    </td>
+                </tr> -->
+              
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td class="infoBoxTd">&nbsp;</td>
+<td align="left"><input type="submit" name="submit" value="保存" class="formInput01" /></td>
+</tr>
+</table>
+</form>
+</div>
+<script>
+KindEditor.ready(function(K) {
+    k1 = K.create('#content', {});
+    k2 = K.create('#content2', {});
+    k3 = K.create('#content3', {});
+
+});
+///var ue = UE.getEditor('content');
+///var ue = UE.getEditor('content2');
+///var ue = UE.getEditor('content3');
+</script>
+    <script>
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+            var start = {
+                elem: '#start',
+                format: 'YYYY-MM-DD hh:mm:ss',
+                min: laydate.now(), //设定最小日期为当前日期
+                max: '2099-06-16 23:59:59', //最大日期
+                istime: false,
+                istoday: false,
+                choose: function(datas){
+                    $("#start").attr("value",datas);
+                    end.min = datas; //开始日选好后，重置结束日的最小日期
+                    end.start = datas //将结束日的初始值设定为开始日
+                }
+            };
+            var end = {
+                elem: '#end',
+                format: 'YYYY-MM-DD hh:mm:ss',
+                min: laydate.now(),
+                max: '2099-06-16 23:59:59',
+                istime: false,
+                istoday: false,
+                choose: function(datas){
+                    $("#end").attr("value",datas);
+                    start.max = datas; //结束日选好后，重置开始日的最大日期
+                }
+            };
+            document.getElementById('start').onclick = function(){
+                start.elem = this;
+                laydate(start);
+            }
+            document.getElementById('end').onclick = function(){
+                end.elem = this
+                laydate(end);
+            }
+        });
+
+        KindEditor.ready(function(K) {
+                K.create('#image_1');
+                var editor = K.editor({
+                    allowFileManager : true,
+                    uploadJson:"{:U('Common/upload')}"
+                    //sdl:false
+                });
+                K('#uparea1').click(function() {
+                    console.log(1);
+                    editor.loadPlugin('image', function() {
+                        editor.plugin.imageDialog({
+                            imageUrl : K('#image_1').val(),
+                            clickFn : function(url, title, width, height, border, align) {
+                                console.log(url);
+                                $('#image1').css('background-image','url('+url+')').css('background-size','220px 160px');
+                                K('#image_1').val(url);
+                                K('#image_11').val(url);
+                                // K('#getImgUrl').val(url);
+                                editor.hideDialog();
+                            }
+                        });
+                    });
+                });
+
+                K('#uparea2').click(function() {
+                    console.log(2);
+                    editor.loadPlugin('image', function() {
+                        editor.plugin.imageDialog({
+                            imageUrl : K('#image_2').val(),
+                            clickFn : function(url, title, width, height, border, align) {
+                                console.log(url);
+                                $('#image2').css('background-image','url('+url+')').css('background-size','220px 160px');
+                                K('#image_2').val(url);
+                                K('#image_22').val(url);
+                                // K('#getImgUrl').val(url);
+                                editor.hideDialog();
+                            }
+                        });
+                    });
+                });
+
+                K('#uparea3').click(function() {
+                    console.log(3);
+                    editor.loadPlugin('image', function() {
+                        editor.plugin.imageDialog({
+                            imageUrl : K('#image_3').val(),
+                            clickFn : function(url, title, width, height, border, align) {
+                                console.log(url);
+                                $('#image3').css('background-image','url('+url+')').css('background-size','220px 160px');
+                                K('#image_3').val(url);
+                                K('#image_33').val(url);
+                                // K('#getImgUrl').val(url);
+                                editor.hideDialog();
+                            }
+                        });
+                    });
+                });
+
+                K('#uparea4').click(function() {
+                    console.log(4);
+                    editor.loadPlugin('image', function() {
+                        editor.plugin.imageDialog({
+                            imageUrl : K('#image_4').val(),
+                            clickFn : function(url, title, width, height, border, align) {
+                                console.log(url);
+                                $('#image4').css('background-image','url('+url+')').css('background-size','220px 160px');
+                                K('#image_4').val(url);
+                                K('#image_44').val(url);
+                                // K('#getImgUrl').val(url);
+                                editor.hideDialog();
+                            }
+                        });
+                    });
+                });
+
+                K('#uparea5').click(function() {
+                    console.log(5);
+                    editor.loadPlugin('image', function() {
+                        editor.plugin.imageDialog({
+                            imageUrl : K('#image_5').val(),
+                            clickFn : function(url, title, width, height, border, align) {
+                                console.log(url);
+                                $('#image5').css('background-image','url('+url+')').css('background-size','220px 160px');
+                                K('#image_5').val(url);
+                                K('#image_55').val(url);
+                                // K('#getImgUrl').val(url);
+                                editor.hideDialog();
+                            }
+                        });
+                    });
+                });
+
+                K('#uparea6').click(function() {
+                    console.log(6);
+                    editor.loadPlugin('image', function() {
+                        editor.plugin.imageDialog({
+                            imageUrl : K('#image_6').val(),
+                            clickFn : function(url, title, width, height, border, align) {
+                                console.log(url);
+                                $('#image6').css('background-image','url('+url+')').css('background-size','220px 160px');
+                                K('#image_6').val(url);
+                                K('#image_66').val(url);
+                                // K('#getImgUrl').val(url);
+                                editor.hideDialog();
+                            }
+                        });
+                    });
+                });
+
+            });
+
+
+            $("#uparea1").mouseover(function(e){
+                $("#big").css({top:e.pageY,right:e.pageX});//鼠标定位一个点
+                var img = $('#image_1').val();
+                if(img.length !== 0) {
+                    $("#big").html('<img src="' + $('#image_1').val() + '" width=380 height=300>');
+                    $("#big").show();        //show：显示
+                }
+            });
+            $("#uparea1").mouseout(function(){
+                $("#big").hide();
+            });
+
+            $("#uparea2").mouseover(function(e){
+                $("#big").css({top:e.pageY,right:e.pageX});//鼠标定位一个点
+                var img = $('#image_2').val();
+                if(img.length !== 0) {
+                    $("#big").html('<img src="' + $('#image_2').val() + '" width=380 height=300>');
+                    $("#big").show();        //show：显示
+                }
+            });
+            $("#uparea2").mouseout(function(){
+                $("#big").hide();
+            });
+
+            $("#uparea3").mouseover(function(e){
+                $("#big").css({top:e.pageY,right:e.pageX});//鼠标定位一个点
+                var img = $('#image_3').val();
+                if(img.length !== 0) {
+                    $("#big").html('<img src="' + $('#image_3').val() + '" width=380 height=300>');
+                    $("#big").show();        //show：显示
+                }
+            });
+            $("#uparea3").mouseout(function(){
+                $("#big").hide();
+            });
+
+            $("#uparea4").mouseover(function(e){
+                $("#big").css({top:e.pageY,right:e.pageX});//鼠标定位一个点
+                var img = $('#image_4').val();
+                if(img.length !== 0) {
+                    $("#big").html('<img src="' + $('#image_4').val() + '" width=380 height=300>');
+                    $("#big").show();        //show：显示
+                }
+            });
+            $("#uparea4").mouseout(function(){
+                $("#big").hide();
+            });
+
+            $("#uparea5").mouseover(function(e){
+                $("#big").css({top:e.pageY,right:e.pageX});//鼠标定位一个点
+                var img = $('#image_5').val();
+                if(img.length !== 0) {
+                    $("#big").html('<img src="' + $('#image_5').val() + '" width=380 height=300>');
+                    $("#big").show();        //show：显示
+                }
+            });
+            $("#uparea5").mouseout(function(){
+                $("#big").hide();
+            });
+
+            $("#uparea6").mouseover(function(e){
+                $("#big").css({top:e.pageY,right:e.pageX});//鼠标定位一个点
+                var img = $('#image_6').val();
+                if(img.length !== 0) {
+                    $("#big").html('<img src="' + $('#image_6').val() + '" width=380 height=300>');
+                    $("#big").show();        //show：显示
+                }
+            });
+            $("#uparea6").mouseout(function(){
+                $("#big").hide();
+            });
+        ///var ue = UE.getEditor('content');
+        ///var ue = UE.getEditor('content2');
+        ///var ue = UE.getEditor('content3');
+        function del_image(num){
+            var img = $('#image_'+num).val();
+            if(img.length !=0) {
+                //if (confirm('是否要删除该图片?\n删除该图片将会连服务器的图片一起删除')) {
+                //    $.post('/system.php/tools/del_img', {url: img}, function (data) {
+                //        if (data['status'] == 'ok') {
+                //            console.log(data);
+                //            $('#image' + num).css('background-image', '');
+                //            $('#image_' + num).val('');
+                //        }
+                //    }, 'json');
+                if (confirm('是否要删除该图片?')) {
+                    $('#image' + num).css('background-image', '');
+                    $('#image_' + num).val('');
+
+                };
+                return false;
+            } else {
+                return false;
+            }
+        }
+    </script>
+<!-----------------------------------------内容结束--------------------------------------------------->
+</div>
+<include file="Public:footer" />

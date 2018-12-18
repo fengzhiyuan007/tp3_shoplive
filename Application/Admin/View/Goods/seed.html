@@ -1,0 +1,312 @@
+<include file="Public:header" />
+<script type="text/javascript">
+function edit(id){
+	location.href="__URL__/edit/id/"+id;
+}
+//进入到下级
+function xj(id){
+	location.href="__URL__/index2/id/"+id;
+}
+function getnums(){
+    var num = $("#nus").val();
+    var start = $("#start").val();
+    var end = $("#end").val();
+    var name = $("#name").val();
+    window.location.href="__URL__/seed?nums="+num+"&start="+start+"&end="+end+"&name="+name;
+}
+function sendname() {
+    var num = $("#nus").val();
+    var start = $("#start").val();
+    var end = $("#end").val();
+    var name = $("#name").val();
+    window.location.href="__URL__/seed?nums="+num+"&start="+start+"&end="+end+"&name="+name;
+}
+</script>
+<form action="" method="get">
+<div class="tools"> 
+<!-- <div class="add"><span><a href="__URL__/toadd_seller">添加</a></span></div> -->
+<div class="del"><span><span><a href="javascript:;">
+<input name="dele" type="submit" value="删除" onclick="datadel()" class="wr"   style="border:none; background-color:#F2F7FD; color:#2D52A5;margin-top:3px;" /></a></span></div>
+
+    <!-- <span style="float:left;padding-top:8px;">每页显示
+        <select id="nus" onchange="getnums();">
+          <volist name="nums" id="l">
+             <option value="{$l}" <if condition=" $l eq $nus ">selected<else/></if>>{$l}</option>
+              </volist>
+        </select> 条
+    </span> -->
+
+    <span style="float:right;padding-top:4px;" >
+        <a href="javascript:;;" class="btn btn-primary radius" onclick="category_edit('添加分类（Seed）','{:U('edit_seed_class',['cate_id'=>$parent['class_id']])}','4','','510')" >
+            <i class="Hui-iconfont">&#xe600;</i>添加分类名
+        </a>
+        <a class="btn btn-success radius r" style="float:right;padding-top:4px;" href="javascript:location.replace(location.href);" title="刷新" >
+            <i class="Hui-iconfont">&#xe68f;</i>
+        </a>
+    </span>
+
+    <span style="float:right;padding-right:50px;padding-top:5px;">
+   <!--&nbsp;&nbsp;注册日期： <input type="text" class="laydate-icon" name="start_time" id="start" size="12" value="{$start}" readonly> - <input type="text" class="laydate-icon" name="end_time" id="end" size="12" value="{$end}" readonly>-->
+        关键词: <input type="text" name="name" id="name" value="{$name}" placeholder="输入分类名称" size="30">
+        <input type="hidden" name="uuid" value="{$_GET['uuid']}">
+
+&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" name="button" value="搜索" id="button" >
+</span>
+</form>
+
+
+
+</div>
+<form action="javascript:;" method="post">
+
+<div class="content">
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tabBox">
+<tr class="tabTitleMain">
+    <td width="" align="center">
+    <input type="checkbox" name="checkbox11" id="checkbox11"  onclick="return checkAll(this,'chois[]')"  value="0">全选</td>
+    
+    <td width="" align="center">名称</td>
+    <!-- <td width="" align="center">颜色</td> -->
+    <td width="" align="center">简介</td>
+    <td width="" align="center">图片</td>
+    <td width="" align="center">发布状态</td>
+    <td width="" align="center">是否推荐</td>
+    <td width="" align="center">操作</td>
+</tr>
+
+
+<volist name='list' id='l' key='i'>
+<tr class="tabTextMain" id="f_{$l.class_id}" onmouseout="this.style.background='#FFFFFF';" onmouseover="this.style.background='#fbf435';">
+  <td align="center"><input type="checkbox" class="deleteids" value="{$l.class_id}" name="chois[]"/>{$i}</td>
+
+    <!-- <td align="center" class="onerow">{$l.merchants_id}</td> -->
+    <td align="center" class="onerow">{$l.class_name}</td>
+    <!-- <td align="center" class="onerow">{$l.class_color}</td> -->
+    <td align="center" class="onerow">{$l.class_desc}</td>
+    <td align="center" class="onerow"><img src="{$l.class_img}" style="width:50px; height:50px; border-radius:25px;"></td>
+
+    <td align="center" class="onerow td-status">
+        <if condition="$l['class_state'] eq 0">
+            <span class="label label-defaunt radius">已下架</span>
+        <else/>
+            <span class="label label-success radius">已发布</span>
+        </if>
+    </td>
+    <td align="center" class="onerow">
+        <if condition="$l['is_recommend'] eq 0">
+            <u><a href="javascript:;;" onClick="change_recommend(this,{$l.class_id})"><span class="label label-defaunt radius">设为推荐</span></a></u>
+        <else/>
+            <u><a href="javascript:;;" onClick="change_recommend(this,{$l.class_id})"><span class="label label-success radius">取消推荐</span></a></u>
+        </if>
+
+    </td>            
+
+  <td align="center" class="td-manage">
+        <if condition="$l['class_state'] eq 0">
+        <a style="text-decoration:none" onClick="picture_start(this,{$l.class_id})" href="javascript:;" title="发布">
+            <i class="Hui-iconfont">&#xe603;</i>
+        </a>
+        <else/>
+        <a style="text-decoration:none" onClick="picture_stop(this,{$l.class_id})" href="javascript:;" title="下架">
+            <i class="Hui-iconfont">&#xe6de;</i>
+        </a>
+        </if>
+        <!-- <a style="text-decoration:none" class="ml-5"  href="{:U('seed',['uuid'=>$l['class_uuid']])}" title="下级分类">
+            <i class="Hui-iconfont">&#xe681;</i>
+        </a> -->
+        <a style="text-decoration:none" class="ml-5"  href="javascript:;;" onclick="category_edit('编辑分类（First）','{:U('edit_seed_class',['id'=>$l['class_id'],'cate_id'=>$parent['class_id']])}','4','','510')" title="编辑">
+            <i class="Hui-iconfont">&#xe6df;</i>
+        </a>
+        <a style="text-decoration:none" class="ml-5" onClick="del(this,{$l.class_id})" href="javascript:;" title="删除">
+            <i class="Hui-iconfont">&#xe6e2;</i>
+        </a>
+   
+   </td>
+</tr>
+</volist>
+</table> 
+</form>
+<div class="pages">{$show}</div>
+
+</div>
+
+<script type="text/javascript">
+/*
+设为推荐
+ */
+function change_recommend(obj,id){
+    layer.confirm('确认要操作吗？',function(index){
+        $.post("{:U('change_class_recommend')}",{id:id},function(data){
+            console.log(data);
+            if(data.data==1){
+                $(obj).parent().parent().html('<u><a href="javascript:;;" onClick="change_recommend(this,'+id+')"><span class="label label-success radius">取消推荐</span></a></u>');
+                layer.msg('操作成功!',{icon: 6,time:1000});
+            }else if(data.data == 0){
+                $(obj).parent().parent().html('<u><a href="javascript:;;" onClick="change_recommend(this,'+id+')"><span class="label label-defaunt radius">设为推荐</span></a></u>');
+                layer.msg('操作成功!',{icon: 6,time:1000});
+            }
+        },'json')
+    });
+}
+/*图片-发布*/
+    function picture_start(obj,id){
+        layer.confirm('确认要发布吗？',function(index){
+            $.post("{:U('change_class_status')}",{id:id},function(data){
+                console.log(data);
+                if(data.data==1){
+                    $(obj).parent().parent().find(".td-manage").prepend('<a style="text-decoration:none" onClick="picture_stop(this,'+id+')" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a>');
+                    $(obj).parent().parent().find(".td-status").html('<span class="label label-success radius">已发布</span>');
+                    $(obj).remove();
+                    layer.msg('已发布!',{icon: 6,time:1000});
+                }
+            },'json')
+        });
+    }
+
+/*图片-下架*/
+    function picture_stop(obj,id){
+        layer.confirm('确认要下架吗？',function(index){
+            $.post("{:U('change_class_status')}",{id:id},function(data){
+                console.log(data);
+                if(data.data==0){
+                    $(obj).parent().parent().find(".td-manage").prepend('<a style="text-decoration:none" onClick="picture_start(this,'+id+')" href="javascript:;" title="发布"><i class="Hui-iconfont">&#xe603;</i></a>');
+                    $(obj).parent().parent().find(".td-status").html('<span class="label label-defaunt radius">已下架</span>');
+                    $(obj).remove();
+                    layer.msg('已下架!',{icon: 5,time:1000});
+                }
+            },'json')
+        });
+    }
+
+function checkAll(e,chois)
+{
+	var aa=document.getElementsByName(chois);
+	for(var i=0;i<aa.length;i++)
+	{  
+		aa[i].checked=e.checked;
+	}
+}
+//function tips(itemName){
+//    var f=false;
+//    var aa=document.getElementsByName(itemName);
+//	for(var i=0;i<aa.length;i++){
+// 		if(aa[i].checked==true){
+//  	 		f=true;
+// 		}
+//	}
+//	if(f==false){
+//		alert("请选择要删除的选项");
+//		return false;
+//	}else{
+//  return  confirm("一旦删除不可修复，确定删除吗？");
+//}
+//return true;
+//}
+//
+function del(obj,id){
+        layer.confirm('确认要删除吗？',function(index){
+            $.post("{:U('del_class')}", {ids:id}, function(data){
+                    console.log(data);
+
+                if( data == 'success' ){
+                    $(obj).parent().parent() .remove();
+                    layer.msg('已删除!',{icon:1,time:1000});
+                }else{
+                    layer.msg('删除失败!',{icon:1,time:1000});
+                }
+        },'json');
+        });
+    }
+
+function datadel(kid){
+        kid = kid ? kid : getChecked();
+        kid = kid.toString();
+        if(kid == ''){
+            layer.msg('你没有选择任何选项！', {offset: 95,shift: 6});
+            return false;
+        }
+        layer.confirm('确认要删除吗？',function(index){
+        $.post("{:U('del_class')}", {ids:kid}, function(data){
+            if( data == 'success' ){
+                layer.msg('已删除!',{icon:1,time:1000},function(){
+                    //关闭后的操作
+                    location.reload("{:U('seed')}");
+                });
+            }else{
+                layer.msg('删除失败!',{icon:5,time:1000});
+            }
+        },'json');
+    })
+    }
+// function del(kid){
+//     kid = kid ? kid : getChecked();
+//     kid = kid.toString();
+//     if(kid == ''){
+//         alert("请选择要删除的选项");
+//         return false;
+//     }
+//     if(!confirm('确定删除？'))
+//         return false;
+//     $.post("{:U('del_class')}", {ids:kid}, function(v){
+//         if( v == 1 ){
+//             alert('删除成功！');
+//             location.reload("{:U('index')}");
+//         }else{
+//             alert('删除失败！');
+//         }
+//     });
+// }
+function getChecked() {
+    var gids = new Array();
+    $.each($('input:checked'), function(i, n){
+        gids.push( $(n).val() );
+    });
+    return gids;
+}
+</script>
+<script>
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+        var start = {
+            elem: '#start',
+            format: 'YYYY-MM-DD',
+            //min: laydate.now(), //设定最小日期为当前日期
+            max: '2099-06-16', //最大日期
+            istime: false,
+            istoday: false,
+            choose: function(datas){
+                $("#start").attr("value",datas);
+                end.min = datas; //开始日选好后，重置结束日的最小日期
+                end.start = datas //将结束日的初始值设定为开始日
+            }
+        };
+        var end = {
+            elem: '#end',
+            format: 'YYYY-MM-DD',
+            //min: laydate.now(),
+            max: '2099-06-16',
+            istime: false,
+            istoday: false,
+            choose: function(datas){
+                $("#end").attr("value",datas);
+                start.max = datas; //结束日选好后，重置开始日的最大日期
+            }
+        };
+        document.getElementById('start').onclick = function(){
+            start.elem = this;
+            laydate(start);
+        }
+        document.getElementById('end').onclick = function(){
+            end.elem = this
+            laydate(end);
+        }
+    });
+
+    function category_edit(title,url,id,w,h){
+        layer_show(title,url,w,h);
+    }
+</script>
+    
+
+<include file="Public:footer" />

@@ -1,0 +1,266 @@
+.banner{
+	width: 100%;
+	height: auto;
+}
+.banner img{
+	display: block;
+	width: 100%;
+	height: auto;
+}
+.head {
+    width: 100%;
+    height: 50px;
+    background: rgba(138,134,134,.5);
+    position: fixed;
+    top: 0px;
+    left: 0;
+}
+.m-head {
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+}
+.head-left {
+    width: 50%;
+    float: left;
+    color: #fff;
+    background: url(../images/logo.png) no-repeat left center;
+    background-size: 30px 30px;
+    text-indent: 40px;
+    font-size: 14px;
+    line-height: 50px;
+}
+.head-right {
+    width: 50%;
+    float: right;
+    height: 100%;
+}
+.head-right a {
+    display: block;
+    width: 80px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #ff000d;
+    font-size: 14px;
+    color: #ff000d;
+    text-align: center;
+    line-height: 30px;
+    margin-top: 8px;
+    float: right;
+}
+.intro{
+	width: 100%;
+	height: 70px;
+}
+.mintro{
+	width: 90%;
+	height: 50px;
+	margin: 10px auto;
+}
+.intro-left{
+	width: 70%;
+	float: left;
+}
+.intro-left img{
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	display: block;
+	float: left;
+}
+.intro-left span{
+	display: block;
+	width: 70%;
+	float: left;
+	font-size: 16px;
+	color: #333;
+	height: 50px;
+	line-height: 50px;
+	text-indent: 5%;
+}
+.intro-right{
+	width: 30%;
+	float: right;
+	height:50px;
+}
+.intro-right span{
+	width: 80%;
+	float: right;
+	height: 30px;
+	margin-top: 5px;
+	border-radius: 5px;
+	color: #fff;
+	text-align: center;
+	line-height: 30px;
+	background: #FF000D;
+	font-size: 12px;
+}
+.title{
+	width: 90%;
+	height: 60px;
+	margin: 0 auto;
+}
+.title-left{
+	width: 80%;
+	float: left;
+	line-height: 30px;
+	font-size: 16px;
+	color: #333;
+}
+.title-right{
+	width: 20%;
+	float: right;
+	position: relative;
+}
+.title-right img{
+	display: block;
+	width: 55px;
+	height: 60px;
+	float: right;
+}
+.buyzi{
+	position: absolute;
+	height: 60px;
+	line-height: 70px;
+	font-size: 12px;
+	color: #fff;
+	right: 0;
+	text-align: center;
+	width:60px;
+}
+.details{
+	width: 90%;
+	height: auto;
+	font-size: 14px;
+	color: #6A6A6A;
+	line-height: 20px;
+	margin:0 auto;
+	text-align: justify;
+}
+.detailsimg{
+	width: 100%;
+	height: auto;
+	display: block;
+	margin-top: 5px;
+}
+.evaluate-head{
+	width: 90%;
+	height: 40px;
+	border-bottom: 1px solid #E8E8E8;
+	margin: 10px auto;
+	line-height: 40px;
+	font-size: 16px;
+	color: #392828;
+}
+.ehead-left{
+	width: 50%;
+	float: left;
+	
+}
+.ehead-left span{
+	color: #ff000d;
+}
+.ehead-right{
+	width: 50%;
+	float: right;
+	text-align: right;
+}
+.evaluate-list{
+	width: 90%;
+	height: 100%;
+	overflow: hidden;
+	margin: 0 auto;
+	padding: 10px 0;
+	border-bottom: 1px solid #E8E8E8;
+}
+.el-head{
+	width: 100%;
+	height: 45px;
+}
+.elhead-left{
+	width: 70%;
+	float: left;
+	font-size: 14px;
+	color: #666;
+}
+.elhead-right{
+	width: 30%;
+	float: right;
+	text-align: right;
+	color: #999;
+	height: 45px;
+	line-height: 45px;
+	font-size: 12px;
+}
+.elname{
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+}
+.star{
+	width: 100%;
+	height: 15px;
+}
+.star li{
+	width: 15px;
+	height: 15px;
+	float: left;
+}
+.star li img{
+	width: 15px;
+	height: 15px;
+}
+.evaluate-detalis{
+	width: 100%;
+	line-height: 20px;
+	font-size: 14px;
+	color: #333333;
+	text-align: justify;
+	margin-top: 10px;
+}
+.foot{
+	width: 100%;
+	height: 40px;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	background: #392828;
+	color: #fff;
+}
+.mfoot{
+	width: 90%;
+	height: 40px;
+	line-height: 40px;
+	font-size: 16px;
+	margin: 0 auto;
+}
+.collect{
+	width: 32%;
+	height: 40px;
+	background: url(../images/icon1.png) no-repeat left center;
+	background-size:22px 22px;
+	text-indent: 10%;
+	float: left;
+	text-align: left;
+	
+	
+}
+.txt{
+	width: 32%;
+	margin-left:2%;
+	background: url(../images/icon2.png) no-repeat 10px center;
+	background-size:22px 22px;
+	text-indent: 15%;
+	float: left;
+	
+}
+.zan{
+	width: 32%;
+	margin-left:2%;
+	background: url(../images/icon3.png) no-repeat 20px center;
+	background-size:22px 22px;
+	text-indent: 30px;
+	float: left;
+	text-align: right;
+}
+

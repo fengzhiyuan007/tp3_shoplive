@@ -1,0 +1,56 @@
+<include file="Public:header" />
+
+<style>
+    .ctextarea {
+        /*height: 100px;*/
+        resize: none;
+        font-size: 14px;
+        padding: 4px;
+    }
+</style>
+<body>
+<div class="page-container">
+    <div id="big"></div>
+    <div id="big2"></div>
+    <form class="form form-horizontal" id="form" method="post">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>名称：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" name="specification_value" class="input-text" value="{$re['specification_value']}" placeholder="规格名称" id="specification_value" />
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">简介：</label>
+            <div class="formControls col-xs-4 col-sm-9">
+                <textarea name="specification_desc" cols="" rows="" style="height: 80px;" class="textarea"  placeholder="说点什么...最少输入3个字符" datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！" onKeyUp="textarealength(this,100)">{$re.specification_desc}</textarea>
+                <p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+
+                <if condition="$_GET.parent_id neq '' ">
+                    
+                    <input type="hidden" name="parent_id" id="parent_id" value="{$_GET['parent_id']}" />
+                <else /> 
+                    <input type="hidden" name="parent_id" id="parent_id" value="-1" />
+                </if>
+
+
+                <input type="hidden" class="input-text" value="{$re['specification_id']}" placeholder=""  name="specification_id">
+                <button type="submit" class="submit btn btn-primary radius"  type="button"><i class="Hui-iconfont">&#xe632;</i> 保存并提交</button>
+                <!--<button onClick="article_save();" class="btn btn-secondary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存草稿</button>-->
+                <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+            </div>
+        </div>
+    </form>
+</div>
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript">
+    
+    
+
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+<include file="Public:footer" />

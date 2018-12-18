@@ -1,0 +1,251 @@
+body{
+	background: #C2C0C0;
+}
+.video{
+	width:100%;
+	height: auto;
+	position: relative;
+	overflow-y:hidden;
+}
+.video video{
+	display: block;
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+	padding: 0;
+}
+#img{
+	width: 60px;
+	height: 60px;
+	top: 30%;
+	left: 40%;
+	display: block;
+	position: absolute;
+}
+.head{
+	width: 100%;
+	height: 50px;
+	background:rgba(138,134,134,.5);
+	/*position: absolute;*/
+	position: fixed;
+	top: 10px;
+	left: 0;
+}
+.m-head{
+	width: 90%;
+	height: 100%;
+	margin: 0 auto;
+}
+.head-left{
+	width: 50%;
+	float: left;
+	color: #fff;
+	background: url(../images/logo.png) no-repeat left center;
+	background-size:30px 30px;
+	text-indent: 40px;
+	font-size: 14px;
+	line-height: 50px;
+}
+.head-right{
+	width: 50%;
+	float: right;
+	height: 100%;
+}
+.head-right a{
+	display: block;
+	width: 80px;
+	height: 30px;
+	border-radius: 5px;
+	border:1px solid #ff000d;
+	font-size: 14px;
+	color: #ff000d;
+	text-align: center;
+	line-height: 30px;
+	margin-top: 8px;
+	float: right;
+}
+.yin{
+	position: absolute;
+	bottom: 10px;
+	width: 90%;
+	left: 5%;
+	color: #fff;
+}
+.title{
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	font-size: 16px;
+	font-weight: bold;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+}
+.num{
+	width: 100%;
+	height: 60px;
+	
+}
+.portrait{
+	width: 60px;
+	height: 60px;
+	display: block;
+	border-radius: 50%;
+	float: left;
+}
+.name{
+	width: 75%;
+	float: left;
+	margin-left: 5%;
+	height: 60px;
+}
+.bigname{
+	margin-top: 10px;
+	width: 100%;
+	height: 20px;
+	line-height: 20px;
+	font-size: 18px;
+	font-weight: bold;
+}
+.playnum{
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	font-size: 14px;
+	
+}
+.play{
+	position: absolute;
+	top: 30%;
+	left: 45%;
+	display: block;
+	width: 50px;
+	height: 50px;
+	
+}
+.splist{
+	width: 100%;
+	height: 100%;
+	background: #333;
+	padding: 10px 0;
+}
+.sptitle{
+	width: 90%;
+	height: 30px;
+	line-height: 30px;
+	color: #fff;
+	margin: 0 auto;
+	font-size: 16px;
+}
+.sptitle span{
+	color: #ff000d;
+}
+.listxq{
+	width: 100%;
+	height: 100%;
+	overflow-x: hidden;
+    overflow-y: scroll;
+}
+.listxq1{
+	width: 100%;
+	float: left;
+	height: auto;
+}
+.swiper-slide img{
+	display: block;
+	width: 100%;
+	height: auto;
+	border-radius: 5px;
+}
+.intro{
+	width: 100%;
+	line-height: 20px;
+	font-size: 14px;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+	height: 40px;
+	margin-top: 10px;
+}
+
+
+
+ .swiper-container {
+      width: 90%;
+      margin: 0 auto;
+      height: 100%;
+	  margin-top: 10px;
+    }
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+    }
+    .hotvideo{
+    	width: 100%;
+    	height: 100%;
+    	background: #333333;
+    	overflow: hidden;
+    	margin-top: 10px;
+    	padding: 10px 0;
+    }
+    .mhot{
+    	width: 90%;
+    	height: auto;
+    	margin: 0 auto;
+    }
+    .hottitle{
+    	width: 90%;
+    	margin: 0 auto;
+    	height: 30px;
+    	line-height: 30px;
+    	font-size: 16px;
+    	color: #fff;
+    }
+    .hotlist{
+    	width: 100%;
+    	height: auto;
+    	margin-top: 10px;
+    }
+    .hotlist li{
+    	width: 32%;
+    	float: left;
+    	height: auto;
+    	margin-left: 2%;
+    }
+    .hotlist li:nth-child(3n+1){
+    	margin-left: 0 !important;
+    }
+    .hotlist li img{
+    	display: block;
+    	width: 100%;
+    	height: auto;
+    	border-radius: 5px;
+    }
+.foot{
+	width: 100%;
+	height: 50px;
+	background: #333333;
+	line-height: 50px;
+	color: #fff;
+	text-align: center;
+	font-size: 14px;
+	
+}
+.toggle{
+	margin-top:30%;
+}

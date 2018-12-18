@@ -1,0 +1,43 @@
+<include file="Public:header" />
+<div class="content">
+<div id="big"></div>
+<div id="big2"></div>
+
+<div class="infoBox">
+<form name="form" method="post">
+<table width="90%" border="0" cellpadding="0" cellspacing="0" id="basic">
+               
+         <br/>
+
+        <br/>   
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;店铺名称：</label>
+            <div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
+            <select name="merchants_id" id="" class="select">
+                <volist name="list" id="vo">
+                    <option value="{$vo.merchants_id}">{$vo.merchants_name}</option>
+                </volist>
+            </select>
+            </span> </div>
+        </div>
+                
+              
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<!-- <td class="infoBoxTd">&nbsp;</td> -->
+<br/>
+
+<br/>
+<td align="center"><input type="submit" name="submit" value="保存" class="formInput01" /></td>
+</tr>
+</table>
+</form>
+</div>
+<script>
+
+</script>
+
+</div>
+<include file="Public:footer" />

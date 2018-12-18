@@ -1,0 +1,203 @@
+<include file="Public:header" />
+<script type="text/javascript">
+function edit(id){
+	location.href="__URL__/edit/id/"+id;
+}
+//进入到下级
+function xj(id){
+	location.href="__URL__/index2/id/"+id;
+}
+function getnums(){
+    var num = $("#nus").val();
+    var start = $("#start").val();
+    var end = $("#end").val();
+    var name = $("#name").val();
+    var is_all = $("#is_all").val();
+    window.location.href="__URL__/warehouse?nums="+num+"&start="+start+"&end="+end+"&name="+name+"&is_all="+is_all;
+}
+function sendname() {
+    var num = $("#nus").val();
+    var start = $("#start").val();
+    var end = $("#end").val();
+    var name = $("#name").val();
+    window.location.href="__URL__/warehouse?nums="+num+"&start="+start+"&end="+end+"&name="+name;
+}
+</script>
+
+<form action="javascript:;" method="post">
+<div class="tools"> 
+<div class="add"><span><a href="__URL__/toadd_warehouse">添加总仓</a></span></div>
+<div class="del"><span><span><a href="javascript:;">
+<input name="dele" type="submit" value="删除" onclick="del();" class="wr"   style="border:none; background-color:#F2F7FD; color:#2D52A5;margin-top:3px;" /></a></span></div>
+
+    <span style="float:left;padding-top:8px;">每页显示
+        <select id="nus" onchange="getnums();">
+          <volist name="nums" id="l">
+             <option value="{$l}" <if condition=" $l eq $nus ">selected<else/></if>>{$l}</option>
+              </volist>
+        </select> 条
+    </span>
+
+    <span style="float:right;padding-right:50px;padding-top:5px;">
+   <!--&nbsp;&nbsp;注册日期： <input type="text" class="laydate-icon" name="start_time" id="start" size="12" value="{$start}" readonly> - <input type="text" class="laydate-icon" name="end_time" id="end" size="12" value="{$end}" readonly>-->
+   <!-- 店铺类型:<select name="is_all" id="is_all" onchange="getnums()">
+            <option value="" <if condition=" $is_all eq '' ">selected</if>>全部</option>
+            <option value="1" <if condition=" $is_all eq 1 ">selected</if>>总仓</option>
+            <option value="0" <if condition=" ($is_all eq 0) AND ($is_all neq '')">selected</if>>普通商铺</option>
+        </select> -->
+        关键词: <input type="text" name="name" id="name" value="{$name}" placeholder="输入商户名，店铺名称，商户账号" size="30">
+&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" name="button" value="搜索" id="button" onclick="sendname()">
+</span>
+
+</div>
+
+<div class="content">
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tabBox">
+<tr class="tabTitleMain">
+    <td width="8%" align="center">
+    <input type="checkbox" name="checkbox11" id="checkbox11"  onclick="return checkAll(this,'chois[]')"  value="0">全选</td>
+    
+    <td width="" align="center">ID</td>
+    <td width="" align="center">商家姓名</td>
+    <td width="" align="center">店铺名称</td>
+    <td width="" align="center">店铺图片</td>
+    <td width="" align="center">商户账号</td>
+
+    <td width="" align="center">审核状态</td>
+    <td width="" align="center">店铺类型</td>
+    <td width="" align="center">申请时间</td>
+    <td width="" align="center">操作</td>
+
+</tr>
+
+
+<volist name='list' id='l' key='i'>
+<tr class="tabTextMain" id="f_{$l.merchants_id}" onmouseout="this.style.background='#FFFFFF';" onmouseover="this.style.background='#fbf435';">
+  <td align="center"><input type="checkbox" class="deleteids" value="{$l.merchants_id}" name="chois[]"/>{$i}</td>
+
+    <td align="center" class="onerow">{$l.merchants_id}</td>
+    <td align="center" class="onerow">{$l.contact_name}</td>
+    <td align="center" class="onerow">{$l.merchants_name}</td>
+    <td align="center" class="onerow"><img src="{$l.merchants_img}" style="width:50px; height:50px; border-radius:25px;"></td>
+
+    <td align="center" class="onerow">{$l.phone}</td>
+    <td align="center" class="onerow">
+            <switch name="l.apply_state">
+                <case value="1">审核中</case>
+                <case value="2">审核通过</case>
+                <case value="3">拒绝</case>
+            </switch></td>
+    <td align="center" class="onerow">
+        <if condition=" $l.is_all eq 1 ">总仓<else/>普通商铺</if>
+    </td>
+    
+    <td align="center" class="onerow">{$l.create_time}</td>
+
+
+  <td align="center">
+                  <!-- <a href="{:U('update_seller',array('mid'=>$l['member_id']))}">编辑</a>&nbsp;&nbsp;|&nbsp;&nbsp; -->
+                  <a href="javascript:;"  onclick="del({$l.merchants_id});">删除</a>
+               
+               </td>
+</tr>
+</volist>
+</table> 
+</form>
+<div class="pages">{$show}</div>
+
+</div>
+
+<script type="text/javascript">
+function checkAll(e,chois)
+{
+	var aa=document.getElementsByName(chois);
+	for(var i=0;i<aa.length;i++)
+	{  
+		aa[i].checked=e.checked;
+	}
+}
+//function tips(itemName){
+//    var f=false;
+//    var aa=document.getElementsByName(itemName);
+//	for(var i=0;i<aa.length;i++){
+// 		if(aa[i].checked==true){
+//  	 		f=true;
+// 		}
+//	}
+//	if(f==false){
+//		alert("请选择要删除的选项");
+//		return false;
+//	}else{
+//  return  confirm("一旦删除不可修复，确定删除吗？");
+//}
+//return true;
+//}
+
+function del(kid){
+    kid = kid ? kid : getChecked();
+    kid = kid.toString();
+    if(kid == ''){
+        alert("请选择要删除的选项");
+        return false;
+    }
+    if(!confirm('确定删除？'))
+        return false;
+    $.post("{:U('del_warehouse')}", {ids:kid}, function(v){
+        if( v == 1 ){
+            alert('删除成功！');
+            location.reload("{:U('warehouse')}");
+        }else{
+            alert('删除失败！');
+        }
+    });
+}
+function getChecked() {
+    var gids = new Array();
+    $.each($('input:checked'), function(i, n){
+        gids.push( $(n).val() );
+    });
+    return gids;
+}
+</script>
+<script>
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+        var start = {
+            elem: '#start',
+            format: 'YYYY-MM-DD',
+            //min: laydate.now(), //设定最小日期为当前日期
+            max: '2099-06-16', //最大日期
+            istime: false,
+            istoday: false,
+            choose: function(datas){
+                $("#start").attr("value",datas);
+                end.min = datas; //开始日选好后，重置结束日的最小日期
+                end.start = datas //将结束日的初始值设定为开始日
+            }
+        };
+        var end = {
+            elem: '#end',
+            format: 'YYYY-MM-DD',
+            //min: laydate.now(),
+            max: '2099-06-16',
+            istime: false,
+            istoday: false,
+            choose: function(datas){
+                $("#end").attr("value",datas);
+                start.max = datas; //结束日选好后，重置开始日的最大日期
+            }
+        };
+        document.getElementById('start').onclick = function(){
+            start.elem = this;
+            laydate(start);
+        }
+        document.getElementById('end').onclick = function(){
+            end.elem = this
+            laydate(end);
+        }
+    });
+</script>
+    
+
+<include file="Public:footer" />

@@ -1,0 +1,61 @@
+<php>
+$uid = I('uuid');
+</php>
+<include file="Public:header" />
+
+<div class="page-container">
+    <div id="big"></div>
+    <div id="big2"></div>
+    <form class="form form-horizontal" id="form" method="post" action="{:U('Goods/comment_reply')}">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>评价用户：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                {$re.username}
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>评价商品：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                {$re.goods_name}
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>星级：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                {$re.mark}
+            </div>
+        </div>
+        <div id="test9"></div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>评价内容：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                {$re.comment_desc}
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">评论图片：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <volist name="re.img" id="vo">
+                <a href="{$vo}" target="_blank">
+                    <div class="droparea spot" style="background-image: url('{$vo}');background-size: 220px;" >
+                    </div>
+                </a>
+                </volist>
+            </div>
+        </div>
+
+        <hr>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>回复：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <textarea name="content" cols="" rows="" class="textarea" placeholder="回复" id="beizhu">{$huifu}</textarea>
+            </div>
+            <button class="submit btn btn-primary radius beizhu_btn" style="margin:65px auto 0;" type="submit">提交</button>
+        </div>
+        <input type="hidden" name="id" value="{$re.comment_id}">
+    </form>
+</div>
+
+
+<include file="Public:footer" />
+
